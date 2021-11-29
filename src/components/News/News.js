@@ -10,7 +10,7 @@ class News extends Component {
                 query: 'q=tesla'
             },
             news2: {
-                type: 'top-headlines'
+                type: 'top-headlines',
                 query: 'country=us'
             }
         };
