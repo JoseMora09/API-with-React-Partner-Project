@@ -1,23 +1,38 @@
+import { render } from '@testing-library/react';
+import React, { Component } from 'react';
 import './App.css';
 import News from './News/News';
 
-function App() {
+
+class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      news1: {
+        type: 'everything',
+        query: 'q=tesla'
+      },
+      news2: {
+        type: 'top-headlines',
+        query: 'country=us'
+      }
+  };
+}
+
+
+
+render() {
   return (
     <div className="App">
       <header className="App-header">
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 className="App-title">My feed</h1>
       </header>
-      <News />
+      <News news={this.state.news1} />
+      <News news={this.state.news2} />
     </div>
   );
 }
+}
+
 
 export default App;

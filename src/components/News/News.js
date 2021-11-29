@@ -2,19 +2,12 @@ import React, {Component} from 'react';
 import NewSingle from './NewSingle';
 
 class News extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            news1: {
-                type: 'everything',
-                query: 'q=tesla'
-            },
-            news2: {
-                type: 'top-headlines',
-                query: 'country=us'
-            }
+          news: [],
         };
-    }
+      }
 
     componentDidMount() {
         const url = 'https://newsapi.org/v2/everything?q=tesla&from=2021-10-29&sortBy=publishedAt&apiKey=c9c78e18d7cd4be597ece5143d89ed91';
