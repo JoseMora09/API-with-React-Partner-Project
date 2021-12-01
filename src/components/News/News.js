@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
+import {DetailsList} from '@fluentui/react';
 import NewSingle from './NewSingle';
 
 class News extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          news: [],
+          powerPlants: [],
         };
       }
 
     componentDidMount() {
-        const url = `https://newsapi.org/v2/${this.props.news.type}?${this.props.news.query}&apiKey=c9c78e18d7cd4be597ece5143d89ed91`;
+         const url = 'https://api.eia.gov/category/?api_key=1d97ccab56e4ea052f94379e9adb787a&category_id=902944';
 
         fetch(url)
         .then((response) => {
@@ -18,25 +19,36 @@ class News extends Component {
         })
         .then((data) => {
             this.setState({
-                news: data.articles
+                powerPlants: data.category.childcategories
             })
         })
         .catch((error) => console.log(error));
     }
 
-    renderItems() {
-        return this.state.news.map((item) =>(
-           <NewSingle key={item.url} item={item} /> 
-        ));
-    }
 
     render() {
         return (
-            <div className="row">
-                {this.renderItems()}
-            </div>
+            <DetailsList
+            items={this.state.powerPlants}
+            columns={[
+              {
+                name: 'categoryID',
+                fieldName: 'category_id',
+                minWidth: 120,
+                maxWidth: 120,
+                isResizable: true,
+              },
+              {
+                name: 'Name',
+                fieldName: 'name',
+                isResizable: true,
+              }
+            ]}
+            setKey="set"
+          />
         );
     }
+
 } 
 
 export default News;
